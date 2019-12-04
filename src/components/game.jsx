@@ -1,6 +1,10 @@
 import Board from "./board";
 import React from 'react';
 class Game extends React.Component {
+
+    componentDidMount() {
+        console.log("Game");
+    }
     render() {
         return (
             

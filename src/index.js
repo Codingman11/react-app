@@ -2,16 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
-import Game from "./components/game";
+import App from "./App";
+import addSymbol from "./reducers/addSymbolReducer";
+import {createStore} from 'redux';
+import { Provider } from 'react-redux';
+
+
+const store = createStore(
+    addSymbol,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 
 
 
 ReactDOM.render(
     
-    <div>
-        <Game />
-    </div>
+    <Provider store = {store}>  
+        <App />
+    </Provider>
     , 
     document.getElementById("root")
 );

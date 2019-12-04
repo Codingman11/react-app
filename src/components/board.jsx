@@ -1,6 +1,8 @@
 import React from 'react';
 import Box from './board-box';
 import calculateWinner from '../utils/isWinner.js';
+import {addSymbol} from '../actions';
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,10 @@ class Board extends React.Component {
         };
     }
 
+
+    componentDidMount() {
+        console.log("Board");
+    }
 
 
     handleClick(i) {
@@ -23,7 +29,7 @@ class Board extends React.Component {
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext,
-            moves: moves
+            
         });
         
     }
@@ -33,6 +39,7 @@ class Board extends React.Component {
         return (
             <Box
                 value={this.state.squares[i]}
+                
                 onClick={() => this.handleClick(i) && this.moves++}
             />
         );
@@ -55,6 +62,7 @@ class Board extends React.Component {
 
         return (
             <div>
+                <div className="test"> {addSymbol} </div>
                 <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}{this.renderSquare(4)}
