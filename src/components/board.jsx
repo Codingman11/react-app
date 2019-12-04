@@ -5,7 +5,7 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            squares: Array(25).fill(null),
+            squares: [],
             xIsNext: true,
             moves: 0
         };
@@ -23,7 +23,7 @@ class Board extends React.Component {
         this.setState({
             squares: squares,
             xIsNext: !this.state.xIsNext,
-
+            moves: moves
         });
         
     }

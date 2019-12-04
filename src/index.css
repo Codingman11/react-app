@@ -31,3 +31,8 @@ code {
 .game-board {
   background: lightblue;
 }
+
+.top {
+  margin-bottom: 10;
+  
+}
