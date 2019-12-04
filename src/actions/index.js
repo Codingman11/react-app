@@ -1,11 +1,12 @@
-import {useDispatch} from 'react-redux';
 export const ADD_SYMBOL = "ADD_SYMBOL";
-export const addSymbol = (xIsNext) => {
+
+
+export const addSymbol = (setSymbol) => dispatch => {
     const action = {
         type: ADD_SYMBOL,
-        payload: xIsNext,
+        payload: setSymbol,
         increment: 1
     }
-    
+    dispatch(action);
 }
 

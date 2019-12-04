@@ -1,18 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Box from './board-box';
 import calculateWinner from '../utils/isWinner.js';
 import {addSymbol} from '../actions';
+import {useSelector} from 'react-redux';
+import { connect } from "react-redux";
 
-class Board extends React.Component {
+class Board extends Component {
     constructor(props) {
         super(props);
         this.state = {
             squares: [],
-            xIsNext: true,
+            playerTurn: true,
             moves: 0
         };
     }
 
+    
 
     componentDidMount() {
         console.log("Board");
@@ -20,18 +23,22 @@ class Board extends React.Component {
 
 
     handleClick(i) {
+        
         const squares = this.state.squares.slice();
         if (calculateWinner(squares) || squares[i] || this.moves === 25) {
             return;
         }
-        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        
+        let turn;
+        squares[i] = this.state.playerTurn ? 'X' : 'O';
+        turn = this.state.playerTurn ? 'X' : 'O';
 
         this.setState({
             squares: squares,
-            xIsNext: !this.state.xIsNext,
+            playerTurn: !this.state.playerTurn,
             
         });
-        
+        this.props.addSymbol({squares});
     }
 
 
@@ -47,7 +54,7 @@ class Board extends React.Component {
 
     render() {
 
-
+        
         const winner = calculateWinner(this.state.squares);
         let status;
         if (winner) {
@@ -55,14 +62,14 @@ class Board extends React.Component {
         } else if (this.state.moves === 25) {
             status = 'Tie';
         } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            status = 'Next player: ' + (this.state.playerTurn ? 'X' : 'O');
 
         }
 
 
         return (
             <div>
-                <div className="test"> {addSymbol} </div>
+                
                 <div className="status">{status}</div>
                 <div className="board-row">
                     {this.renderSquare(0)}{this.renderSquare(1)}{this.renderSquare(2)}{this.renderSquare(3)}{this.renderSquare(4)}
@@ -84,4 +91,10 @@ class Board extends React.Component {
     }
 }
 
-export default Board;
+const mapStateToProps = state => ({
+    squares: state.squares
+  });
+
+export default connect(mapStateToProps, {
+    addSymbol
+  })(Board);

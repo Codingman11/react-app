@@ -1,23 +1,23 @@
 import {ADD_SYMBOL} from '../actions';
 
 const initialState = {
-    board: [],
-    xIsNext: true,
+    sqares: [],
+    playerTurn: true,
     moves: 0
-};
+}
 
-
-
-const addSymbol = (state, action) => {
+const game = (state = initialState, action) => {
     switch(action.type) {
         case "ADD_SYMBOL":
             return {
+                ...state,
                 squares: [action.payload],
                 moves: action.increment
             }
+
         default:
             return state;
     }
 }
 
-export default addSymbol;
+export default game;

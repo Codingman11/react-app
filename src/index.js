@@ -3,13 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
-import addSymbol from "./reducers/addSymbolReducer";
+import game from "./reducers/gameReducer";
 import {createStore} from 'redux';
 import { Provider } from 'react-redux';
 
 
 const store = createStore(
-    addSymbol,
+    game,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
